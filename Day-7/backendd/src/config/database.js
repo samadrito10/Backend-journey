@@ -1,0 +1,20 @@
+// database connection file
+
+const mongoose = require('mongoose');
+const dns=require("dns");
+
+dns.setServers(['1.1.1.1',
+                '8.8.8.8'
+]);
+
+function connectToDB() {
+    mongoose.connect(process.env.MONGO_URI)
+        .then(() => {
+            console.log('connected to database');
+        })
+        .catch((err) => {
+            console.log('error connecting to database', err);
+        }   );
+}
+
+module.exports = connectToDB;
