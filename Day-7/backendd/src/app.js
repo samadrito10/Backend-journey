@@ -7,6 +7,7 @@
     const noteModel = require('./models/note.model');
     app.use(cors());
     app.use(express.json());
+    app.use(express.static("./public"));
     
 
     /*-Post/api/notes
@@ -54,14 +55,19 @@
     -return the updated note in response
     -request body={title: string, description: string}
     */
+
    app.patch('/api/notes/:id', async (req, res) => {
     const id = req.params.id;
-    const {description} = req.body;
+    const {title, description} = req.body;
 
-    await noteModel.findByIdAndUpdate(id, {description})
+    await noteModel.findByIdAndUpdate(id, {title, description})
     res.status(200).json({
         Message: 'Note updated successfully'
     });
    });
+
+   app.use('*name', (req, res) => {
+    re.sendFile(__dirname, "..", '/public/index.html');
+   })
 
     module.exports = app;
