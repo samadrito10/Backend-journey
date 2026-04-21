@@ -6,7 +6,7 @@ const App = () => {
   const [notes, setNotes] = useState([]);
 
   function fetchNotes() {
-    axios.get("http://localhost:3000/api/notes")
+    axios.get("https://backend-journey-vrz8.onrender.com/api/notes")
     .then((res) => {
       setNotes(res.data.notes);
     })
@@ -20,7 +20,7 @@ const App = () => {
     const {title, description} = e.target.elements;
     console.log(title.value, description.value);
 
-    axios.post("http://localhost:3000/api/notes", {
+    axios.post("https://backend-journey-vrz8.onrender.com/api/notes", {
       title: title.value,
       description: description.value
     })
@@ -31,7 +31,7 @@ const App = () => {
 
   }
   function handleDelete(noteId) {
-    axios.delete("http://localhost:3000/api/notes/"+noteId)
+    axios.delete("https://backend-journey-vrz8.onrender.com/api/notes/"+noteId)
     .then((res) => {
       console.log(res.data);
       fetchNotes();
@@ -41,7 +41,7 @@ const App = () => {
     const choose=prompt("Do you want to edit the title or description? (title/description)");
     if(choose==="title"){
       const newTitle = prompt("Enter new title");
-      axios.patch("http://localhost:3000/api/notes/"+noteId, {
+      axios.patch("https://backend-journey-vrz8.onrender.com/api/notes/"+noteId, {
         title: newTitle
       })
       .then((res) => {
@@ -51,7 +51,7 @@ const App = () => {
     }
     else if(choose==="description"){
       const newDescription = prompt("Enter new description");
-      axios.patch("http://localhost:3000/api/notes/"+noteId, {
+      axios.patch("https://backend-journey-vrz8.onrender.com/api/notes/"+noteId, {
         description: newDescription
       })
       .then((res) => {
